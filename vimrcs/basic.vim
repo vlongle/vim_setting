@@ -39,6 +39,32 @@ call vundle#begin()
 " let vundle manage vundle, required
 Plugin 'vundlevim/vundle.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+" Fuzzy finder. Note need to `brew install fzf` first
+" Install `brew install ripgrep` to find string within files
+" Sorta like Cmd-shift-f in VSCode
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+" Ctrl+f to search Files using fzf
+nnoremap <silent> <C-f> :Files<CR>
+" Ctrl+g to search string within many files (using Vim-rooter to allow access to all files within a git repo as well) using fzf (and ripgrep)
+nnoremap <silent> <C-w> :Rg<CR>
+" Ctrl+l to do basically a convenient `:/` search within a file
+" where you can see vertically the lines that match the search
+" The autocmd VimEnter * stuff is to overwrite vim pluggin mapping
+" because ctrl+l is already used by fzf for some useless commands.
+" Overwritting pluggin mapping: https://vi.stackexchange.com/questions/756/how-can-i-redefine-plugin-key-mappings
+autocmd VimEnter * nnoremap <C-l> :Lines<CR>
+
+" display the fzf in the bottom pane about 30%
+" estate of the screen
+let g:fzf_layout = { 'down': '~30%' }
+" Note: use ctrl+c or ESC to exit fzf
+
+" Useful reference for fuzzy finder: https://www.youtube.com/watch?v=on1AzaZzQ7k&ab_channel=ChrisAtMachine
+" Allow fuzzy finder to search for files
+" in all of this current git repo not only
+" just the current directory
+Plugin 'airblade/vim-rooter'
 
 call vundle#end()            " required
 
