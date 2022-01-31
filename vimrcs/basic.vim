@@ -463,3 +463,13 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+" Other packages installed in ~/.vim:
+" - tcomment_vim https://github.com/tomtom/tcomment_vim
+" in Neovim: ~/.config/nvim/pack
+" - github copilot https://github.com/github/copilot.vim
+" Porting config from vim to neovim
+" Include the following in your ~/.config/nvim/init.vim
+" set runtimepath^=~/.vim runtimepath+=~/.vim/after
+" let &packpath=&runtimepath
+" source ~/.vimrc
+"
