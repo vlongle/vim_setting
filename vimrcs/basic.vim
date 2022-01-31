@@ -25,6 +25,9 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
 
 " Vundle
 "
@@ -47,7 +50,7 @@ Plugin 'junegunn/fzf.vim'
 " Ctrl+f to search Files using fzf
 nnoremap <silent> <C-f> :Files<CR>
 " Ctrl+g to search string within many files (using Vim-rooter to allow access to all files within a git repo as well) using fzf (and ripgrep)
-nnoremap <silent> <C-w> :Rg<CR>
+nnoremap <silent> <C-g> :Rg<CR>
 " Ctrl+l to do basically a convenient `:/` search within a file
 " where you can see vertically the lines that match the search
 " The autocmd VimEnter * stuff is to overwrite vim pluggin mapping
@@ -66,6 +69,26 @@ let g:fzf_layout = { 'down': '~30%' }
 " just the current directory
 Plugin 'airblade/vim-rooter'
 
+" github support for vim
+" https://www.youtube.com/watch?v=PO6DxfGPQvw&ab_channel=ThePrimeagen
+Plugin 'tpope/vim-fugitive'
+
+" vim-airline to show git info at the bottom of the screen
+Plugin 'vim-airline/vim-airline'
+
+" :Git or :G (for short) to open git status
+nmap <leader>gs :G<CR>
+" hit s or u to stage or unstage the file(s) and hit enter to commit
+" Gpush to push the current branch to the remote
+nmap <leader>gp :Git push<CR>
+" Git merge b to merge the current branch with branch "b"
+" Some useful mappings for git merge:
+"
+"get the code from the left
+nmap <leader>gf :diffget //2<CR> 
+"get the code from the right
+nmap <leader>gj :diffget //3<CR>
+
 call vundle#end()            " required
 
 
@@ -83,9 +106,6 @@ call vundle#end()            " required
     " Set to auto read when a file is changed from the outside
     set autoread
 
-    " With a map leader it's possible to do extra key combinations
-    " like <leader>w saves the current file
-    let mapleader = ","
 
     " Fast saving
     nmap <leader>w :w!<cr>
@@ -187,10 +207,12 @@ call vundle#end()            " required
     "catch
     " endtry
 
-set background=dark
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-colorscheme default
+" set background=dark
+colorscheme gruvbox
 set cursorline
+" https://stackoverflow.com/questions/37712730/set-vim-background-transparent. Make
+" transparent background
+" autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 
 
 " Set extra options when running in GUI mode
