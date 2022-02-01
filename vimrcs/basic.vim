@@ -25,6 +25,7 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -41,6 +42,7 @@ call vundle#begin()
 
 " let vundle manage vundle, required
 Plugin 'vundlevim/vundle.vim'
+
 Plugin 'JamshedVesuna/vim-markdown-preview'
 " Fuzzy finder. Note need to `brew install fzf` first
 " Install `brew install ripgrep` to find string within files
@@ -79,8 +81,8 @@ Plugin 'vim-airline/vim-airline'
 " :Git or :G (for short) to open git status
 nmap <leader>gs :G<CR>
 " hit s or u to stage or unstage the file(s) and hit enter to commit
-" Gpush to push the current branch to the remote
 nmap <leader>gp :Git push<CR>
+nmap <leader>gc :Git commit<CR>
 " Git merge b to merge the current branch with branch "b"
 " Some useful mappings for git merge:
 "
@@ -88,8 +90,11 @@ nmap <leader>gp :Git push<CR>
 nmap <leader>gf :diffget //2<CR> 
 "get the code from the right
 nmap <leader>gj :diffget //3<CR>
-
+" to see diff change in a staged file
+" https://stackoverflow.com/questions/15407652/how-can-i-run-git-diff-staged-with-fugitive/29454450
+" Hit "dd" on the file in :Git
 call vundle#end()            " required
+
 
 
 
@@ -390,7 +395,7 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
+" map <leader>q :e ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
 map <leader>x :e ~/buffer.md<cr>
@@ -457,6 +462,21 @@ inoremap ∆ <Esc>:m .+1<CR>==gi
 inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Map <leader>q to Ctrl+w c to close the current tab
+nnoremap <leader>q <C-w>c 
+" Map <leader>w to Ctrl+w v to open a vertical pane split
+nnoremap <leader>v <C-w>v
+" Map <leader>w to Ctrl+w s to open a horizontal pane split
+nnoremap <leader>s <C-w>s
+" Map <leader>w to Ctrl+w Ctrl+w to switch between panes
+nnoremap <leader>n <C-w><C-w>
+
+
+" to quit vim using Ctrl+q because typing
+" :q! is too long
+nnoremap <C-q> :q!<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
