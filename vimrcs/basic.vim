@@ -25,75 +25,249 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    " With a map leader it's possible to do extra key combinations
+    " like <leader>w saves the current file
+    let mapleader = ","
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
+    " Vundle
+    "
+    " set the runtime path to include vundle and initialize
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+    set rtp+=~/.vim/bundle/vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where vundle should install plugins
+    "call vundle#begin('~/some/path/here')
 
-" Vundle
-"
-" set the runtime path to include vundle and initialize
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/vundle.vim
-call vundle#begin()
-" alternatively, pass a path where vundle should install plugins
-"call vundle#begin('~/some/path/here')
+    " let vundle manage vundle, required
+    Plugin 'vundlevim/vundle.vim'
 
-" let vundle manage vundle, required
-Plugin 'vundlevim/vundle.vim'
+    Plugin 'JamshedVesuna/vim-markdown-preview'
+    " Fuzzy finder. Note need to `brew install fzf` first
+    " Install `brew install ripgrep` to find string within files
+    " Sorta like Cmd-shift-f in VSCode
+    Plugin 'junegunn/fzf'
+    Plugin 'junegunn/fzf.vim'
+    " Ctrl+f to search Files using fzf
+    nnoremap <silent> <C-f> :Files<CR>
+    " Ctrl+g to search string within many files (using Vim-rooter to allow access to all files within a git repo as well) using fzf (and ripgrep)
+    nnoremap <silent> <C-g> :Rg<CR>
+    " Ctrl+l to do basically a convenient `:/` search within a file
+    " where you can see vertically the lines that match the search
+    " The autocmd VimEnter * stuff is to overwrite vim pluggin mapping
+    " because ctrl+l is already used by fzf for some useless commands.
+    " Overwritting pluggin mapping: https://vi.stackexchange.com/questions/756/how-can-i-redefine-plugin-key-mappings
+    autocmd VimEnter * nnoremap <C-l> :Lines<CR>
 
-Plugin 'JamshedVesuna/vim-markdown-preview'
-" Fuzzy finder. Note need to `brew install fzf` first
-" Install `brew install ripgrep` to find string within files
-" Sorta like Cmd-shift-f in VSCode
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-" Ctrl+f to search Files using fzf
-nnoremap <silent> <C-f> :Files<CR>
-" Ctrl+g to search string within many files (using Vim-rooter to allow access to all files within a git repo as well) using fzf (and ripgrep)
-nnoremap <silent> <C-g> :Rg<CR>
-" Ctrl+l to do basically a convenient `:/` search within a file
-" where you can see vertically the lines that match the search
-" The autocmd VimEnter * stuff is to overwrite vim pluggin mapping
-" because ctrl+l is already used by fzf for some useless commands.
-" Overwritting pluggin mapping: https://vi.stackexchange.com/questions/756/how-can-i-redefine-plugin-key-mappings
-autocmd VimEnter * nnoremap <C-l> :Lines<CR>
+    " display the fzf in the bottom pane about 30%
+    " estate of the screen
+    " let g:fzf_layout = { 'down': '~30%' }
+    " Note: use ctrl+c or ESC to exit fzf
 
-" display the fzf in the bottom pane about 30%
-" estate of the screen
-let g:fzf_layout = { 'down': '~30%' }
-" Note: use ctrl+c or ESC to exit fzf
+    " Useful reference for fuzzy finder: https://www.youtube.com/watch?v=on1AzaZzQ7k&ab_channel=ChrisAtMachine
+    " Allow fuzzy finder to search for files
+    " in all of this current git repo not only
+    " just the current directory
+    Plugin 'airblade/vim-rooter'
 
-" Useful reference for fuzzy finder: https://www.youtube.com/watch?v=on1AzaZzQ7k&ab_channel=ChrisAtMachine
-" Allow fuzzy finder to search for files
-" in all of this current git repo not only
-" just the current directory
-Plugin 'airblade/vim-rooter'
+    " github support for vim
+    " https://www.youtube.com/watch?v=PO6DxfGPQvw&ab_channel=ThePrimeagen
+    Plugin 'tpope/vim-fugitive'
 
-" github support for vim
-" https://www.youtube.com/watch?v=PO6DxfGPQvw&ab_channel=ThePrimeagen
-Plugin 'tpope/vim-fugitive'
 
-" vim-airline to show git info at the bottom of the screen
-Plugin 'vim-airline/vim-airline'
+    " vim-airline to show git info at the bottom of the screen
+    Plugin 'vim-airline/vim-airline'
 
-" :Git or :G (for short) to open git status
-nmap <leader>gs :G<CR>
-" hit s or u to stage or unstage the file(s) and hit enter to commit
-nmap <leader>gp :Git push<CR>
-nmap <leader>gc :Git commit<CR>
-" Git merge b to merge the current branch with branch "b"
-" Some useful mappings for git merge:
-"
-"get the code from the left
-nmap <leader>gf :diffget //2<CR> 
-"get the code from the right
-nmap <leader>gj :diffget //3<CR>
-" to see diff change in a staged file
-" https://stackoverflow.com/questions/15407652/how-can-i-run-git-diff-staged-with-fugitive/29454450
-" Hit "dd" on the file in :Git
-call vundle#end()            " required
+    " :Git or :G (for short) to open git status
+    nmap <leader>gs :G<CR>
+    " hit s or u to stage or unstage the file(s) and hit enter to commit
+    nmap <leader>gp :Git push<CR>
+    nmap <leader>gc :Git commit<CR>
+    " Git merge b to merge the current branch with branch "b"
+    " Some useful mappings for git merge:
+    "
+    "get the code from the left
+    nmap <leader>gf :diffget //2<CR> 
+    "get the code from the right
+    nmap <leader>gj :diffget //3<CR>
+    " to see diff change in a staged file
+    " https://stackoverflow.com/questions/15407652/how-can-i-run-git-diff-staged-with-fugitive/29454450
+    " Hit "dd" on the file in :Git
+    " https://stackoverflow.com/questions/23263499/jumping-between-changed-lines-in-vim-with-fugitive/23267735
+    " Use "]c" and "[c" to jump between changed lines
+
+
+    " intellisense for vim using coc
+    " https://www.youtube.com/watch?v=OXEVhnY621M&t=3s&ab_channel=ChrisAtMachine
+    " https://github.com/neoclide/coc.nvim/issues/3258. Go to the coc.nvim/ folder and run:
+    " `yarn install` and `yarn build`
+    " https://github.com/neoclide/coc.nvim/wiki/Language-servers
+    Plugin 'neoclide/coc.nvim'
+    " Python: :CocInstall coc-pyright
+    " Javascript: :CocInstall coc-tsserver 
+    " C/C++/Objective-C: :CocInstall coc-clangd
+    " CSS: :CocInstall coc-css
+    " HTML: :CocInstall coc-html
+    " Vim: :CocInstall coc-vimlsp
+    " Didn't install coc-snippets because I already
+    " have github copilot.
+    " Do :checlhealth to see if everything is installed for the current file
+
+
+    " https://github.com/neoclide/coc.nvim
+    " has a setup of keybindings for coc.
+    " gd jump to definition using Coc (which can locate the definition of a symbol
+    " across files in the current project. Without coc, `gd` only works for the
+    " current file.)
+    nmap <silent> gd <Plug>(coc-definition)
+    " gD to jump definition in a new pane
+    autocmd VimEnter * nmap  <silent> gD :call CocAction('jumpDefinition', 'vsplit')<CR>
+    " gr highlight references to the symbol under the cursor across files in the
+    " current project. This is equivalent to using fzf to do :Rg (ctrl+g) and 
+    " then search for the symbol
+    nmap gr <Plug>(coc-references)
+    " cool Coc :call CocAction('format') to format
+    " :CocConfig to go to coc config and add stuff like
+    "     {"coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript", "c", "cpp", "objective-c", "css", "html"]}
+    "  to call :CocAction('format') on save (i.e. on :w)
+    "  :h Coc to see documentation and search for e.g. formatOnSaveFiletypes
+
+    " Use ctrl+space to trigger/bring out completion.
+    if has('nvim')
+      inoremap <expr> <c-space> coc#refresh()
+    else
+      inoremap <silent><expr> <c-@> coc#refresh()
+    endif
+    " :CocDiagnostics to see errors in the current file
+    " Use K to show documentation in preview window.
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      elseif (coc#rpc#ready())
+        call CocAction('doHover')
+      else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+      endif
+    endfunction
+
+    "issue: https://github.com/neoclide/coc.nvim/issues/1405
+    " Fix: use ctrl+w ctrl+w (or <leader>n in our binding) to switch to the documentation preview window, 
+    " and scroll there
+
+
+    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+    " delays and poor user experience. 
+    set updatetime=100
+
+    " Highlight the symbol under the cursor and its references within the file 
+    " e.g. we have a function def fn() and then we have fn() in the file. When the
+    " cursor is on fn() then we want to highlight fn() and its references (including the def fn() part)
+    " NOTE: updatetime=100 means that the cursor has to be on the symbol for only 100 ms
+    " to trigger the highlighting instead of 4s as default.
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+
+    " rename a symbol mostly within a file
+    nmap <leader>r <Plug>(coc-rename)
+    " search for the symbol under the cursor across files in the current project
+    " useful to rename a symbol across files
+    nnoremap <leader>f :CocSearch <C-R>=expand('<cword>')<CR><CR>
+
+    " Applying codeAction to the selected region.
+    " Example: `<leader>aap` for current paragraph
+    " Action like "extract method" or "extract variable"
+    " Need module rope "pip install rope"
+    " " Applying codeAction to the selected region.
+    " Example: `<leader>aap` for current paragraph
+    " Commented out in favor of the coc-actions
+    " <leader>a for the current selected range
+    " <leader>aw for the current word
+    " <leader>aas for the current sentence
+    " <leader>aap for the current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+
+
+    " Map function and class text objects
+    " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+    " xmap: visual mode map, omap: operator mode map
+    " E.g. "daf" delete the current function
+    xmap if <Plug>(coc-funcobj-i)
+    omap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    omap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap ac <Plug>(coc-classobj-a)
+
+    " The following is __NOT__ needed. https://github.com/neoclide/coc.nvim/wiki/Statusline-integration
+    " because I have vim airline plugin, which works out of the box.
+    "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+    " coc videos: https://www.youtube.com/watch?v=q7gr6s8skt0&ab_channel=ThePrimeagen
+
+    " coc-explorer: like vscode. Should use this instead of :Sex!
+    " https://www.youtube.com/watch?v=vrEJ6NopAGo&ab_channel=ChrisAtMachine
+    " https://github.com/weirongxu/coc-explorer
+    " Issue: https://iboxshare.com/weirongxu/coc-explorer/issues/480
+    " Add "explorer.icon.enableNerdfont": true 
+    " to coc-settings.json 
+    " To make it like Vscode, we'll use Cmd+b to open the explorer
+    " but vim doesn't support cmd, so we'll have to use iterm key
+    " sending trick. https://stackoverflow.com/questions/40990454/how-to-map-mac-command-key-in-vim.
+    " Go to iterm preferences>keys and add a new key mapping with Cmd+b
+    " and action "Send text with "vim" special chars" :CocCommand explorer\n
+    " :nmap <leader>f <Cmd>CocCommand explorer<CR>
+    " Default keybindings added from github
+    " can be seen in :CocConfig
+    " Left side is staged and right side is unstaged in coc-explorer
+    
+    let g:coc_explorer_open_win = 'g:open_float_win_for_coc_explorer'
+
+
+    " navigate between error
+    nmap <silent> [e <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]e <Plug>(coc-diagnostic-next)
+
+
+    " https://github.com/lilydjwg/colorizer 
+    " to color #rgb, #rgba, #rrggbb, #rrgbbaa, rgb(...), rgba(...)
+    " similar to plugin in vscode
+    " ColorTogggle: toggle colorizer
+    Plugin('lilydjwg/colorizer')
+
+
+    " in insert mode, remap shift-tab to ctrl+p
+    " ctrl+p is to go backward in coc suggestion list 
+    " (i.e. inverse of tab)
+    inoremap <S-Tab> <C-P>
+
+
+    Plugin 'ThePrimeagen/vim-be-good'
+
+    Plugin 'justinmk/vim-sneak'
+    let g:sneak#label = 1
+    " case insensitive search
+    let g:sneak#use_ic_scs = 1
+    " use s to search downward and S to search upward
+
+
+    Plugin 'unblevable/quick-scope' 
+    
+    " Latex support
+    Plugin 'lervag/vimtex'
+    " close quickfix menu while compiling bc it's annoying
+    " can always bring it back with \le
+    let g:vimtex_quickfix_enabled = 0
+    
+    " compiling on save
+    let g:vimtex_latexmk_preview_continuosly=1
+
+
+    call vundle#end()            " required
 
 
 
@@ -105,8 +279,8 @@ call vundle#end()            " required
     set history=500
 
     " Enable filetype plugins
-    "filetype plugin on
-    "filetype indent on
+    filetype plugin on
+    filetype indent on
 
     " Set to auto read when a file is changed from the outside
     set autoread
@@ -131,7 +305,7 @@ call vundle#end()            " required
     set langmenu=en
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
-    
+
     " Turn on the Wild menu
     set wildmenu
 
@@ -150,7 +324,7 @@ call vundle#end()            " required
     set cmdheight=2
 
     " A buffer becomes hidden when it is abandoned
-    " set hid
+    set hid
 
     " Configure backspace so it acts as it should act
     set backspace=eol,start,indent
@@ -212,152 +386,159 @@ call vundle#end()            " required
     "catch
     " endtry
 
-" set background=dark
-colorscheme gruvbox
-set cursorline
-" https://stackoverflow.com/questions/37712730/set-vim-background-transparent. Make
-" transparent background
-" autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+    set background=dark
+    " colorscheme gruvbox
+    colorscheme molokai
 
 
-" Set extra options when running in GUI mode
-if has("gui_running")
+    " packadd! dracula
+    " colorscheme dracula
+
+
+    set cursorline
+    " https://stackoverflow.com/questions/37712730/set-vim-background-transparent. Make
+    " transparent background
+    " autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+
+
+    " Set extra options when running in GUI mode
+    if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
-endif
+    endif
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+    " Set utf8 as standard encoding and en_US as the standard language
+    set encoding=utf8
 
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
+    " Use Unix as the standard file type
+    set ffs=unix,dos,mac
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Files, backups and undo
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Turn backup off, since most stuff is in SVN, git et.c anyway...
+    set nobackup
+    set nowb
+    set noswapfile
 
 
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Text, tab and indent related
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Use spaces instead of tabs
+    set expandtab
+
+    " Be smart when using tabs ;)
+    set smarttab
+
+    " 1 tab == 4 spaces
+    set shiftwidth=4
+    set tabstop=4
+
+    " Linebreak on 500 characters
+    set lbr
+    set tw=500
+
+    set ai "Auto indent
+    set si "Smart indent
+    set wrap "Wrap lines
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
-
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+    """"""""""""""""""""""""""""""
+    " => Visual mode related
+    """"""""""""""""""""""""""""""
+    " Visual mode pressing * or # searches for the current selection
+    " Super useful! From an idea by Michael Naumann
+    vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+    vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Moving around, tabs, windows and buffers
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+    map <space> /
+    "map <c-space> ?
 
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+    " Disable highlight when <leader><cr> is pressed
+    map <silent> <leader><cr> :noh<cr>
 
-" Specify the behavior when switching between buffers 
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
+    " Smart way to move between windows
+    map <C-j> <C-W>j
+    map <C-k> <C-W>k
+    map <C-h> <C-W>h
+    map <C-l> <C-W>l
 
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    " Close the current buffer
+    map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+    " Close all the buffers
+    map <leader>ba :bufdo bd<cr>
+
+    map <leader>l :bnext<cr>
+    map <leader>h :bprevious<cr>
+
+    " Useful mappings for managing tabs
+    map <leader>tn :tabnew<cr>
+    map <leader>to :tabonly<cr>
+    map <leader>tc :tabclose<cr>
+    map <leader>tm :tabmove 
+    map <leader>t<leader> :tabnext 
+
+    " Let 'tl' toggle between this and the last accessed tab
+    let g:lasttab = 1
+    nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+    au TabLeave * let g:lasttab = tabpagenr()
 
 
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
+    " Opens a new tab with the current buffer's path
+    " Super useful when editing files in the same directory
+    map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+    " Switch CWD to the directory of the open buffer
+    map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+    " Specify the behavior when switching between buffers 
+    try
+      set switchbuf=useopen,usetab,newtab
+      set stal=2
+    catch
+    endtry
+
+    " Return to last edit position when opening files (You want this!)
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
+    """"""""""""""""""""""""""""""
+    " => Status line
+    """"""""""""""""""""""""""""""
+    " Always show the status line
+    set laststatus=2
 
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+    " Format the status line
+    set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " => Editing mappings
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Remap VIM 0 to first non-blank character
+    map 0 ^
+
+    " Move a line of text using ALT+[jk] or Command+[jk] on mac
+    " nmap <leader> jj> mz:m+<cr>`z
+    " nmap <leader> kk> mz:m-2<cr>`z
+    " vmap <leader> jj> :m'>+<cr>`<my`>mzgv`yo`z
+    " vmap <leader> kk> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
+  nmap <D-j> <leader> jj>
+  nmap <D-k> <leader> kk>
+  vmap <D-j> <leader> jj>
+  vmap <D-k> <leader> kk>
 endif
 
 " Delete trailing white space on save, useful for some filetypes ;)
@@ -427,7 +608,8 @@ nohls
 nnoremap <esc><esc> :silent! nohls<cr>
 "Sex! is open a pane to show the file folder in this dir
 " Sorta like Cmd + b in Vscode
-nnoremap <leader>f :Sex!<CR>
+" Deprecated in favor of coc-explorer
+" nnoremap <leader>f :Sex!<CR>
 " automatically source .vimrc within a project folder.
 " Allowing custom behavior for different folders
 set exrc
@@ -446,7 +628,6 @@ set scrolloff=100
 set clipboard^=unnamed
 
 " resize more quickly. <silent> prevents vim from printing
-" the name of the command at the bottom
 nnoremap  <silent> = :exe "vertical resize +5"<CR>
 nnoremap  <silent> - :exe "vertical resize -5"<CR>
 nnoremap  <silent> + :exe "resize +5"<CR>
@@ -463,8 +644,8 @@ inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
 
-" Map <leader>q to Ctrl+w c to close the current tab
-nnoremap <leader>q <C-w>c 
+" Map Ctrl+q to Ctrl+w c to close the current tab
+nnoremap <C-q> <C-w>c 
 " Map <leader>w to Ctrl+w v to open a vertical pane split
 nnoremap <leader>v <C-w>v
 " Map <leader>w to Ctrl+w s to open a horizontal pane split
@@ -473,9 +654,39 @@ nnoremap <leader>s <C-w>s
 nnoremap <leader>n <C-w><C-w>
 
 
-" to quit vim using Ctrl+q because typing
+" to quit vim using <leader> (i.e. ",") q because typing
 " :q! is too long
-nnoremap <C-q> :q!<CR>
+nnoremap <leader>q :q!<CR>
+
+
+"Custom to always open split below or to the right
+" set splitbelow
+" set splitright
+
+" open terminal in splits horizontal below or vertical right
+command Vterm :belowright vsplit | terminal
+command Sterm :belowright split | terminal
+" use ctrl+\ ctrl+n to quit terminal mode
+nnoremap tv :Vterm<CR>
+nnoremap ts :Sterm<CR>
+
+
+" Note: in vim, ctrl+[ functions as <ESC>
+" remap to quit terminal faster using ctrl+[
+" Also use M + hjkl to move around pane splits that involve a terminal
+if has('nvim')
+" terminal mode
+  tnoremap <C-[> <C-\><C-n> 
+  " tnoremap <leader> nn <c-\><c-n> <c-w><c-w>
+endif
+" use ctrl+c as ESC
+inoremap <C-C> <ESC>
+nnoremap <C-C> <ESC>
+
+
+" for colorscheme such as synthwave84
+set termguicolors
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
