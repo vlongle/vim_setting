@@ -395,6 +395,7 @@
     nmap ]m :BookmarkNext<cr>
     nmap [m :BookmarkPrev<cr>
 
+    Plugin 'tpope/vim-commentary'
     call vundle#end()            " required
 
 
