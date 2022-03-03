@@ -34,7 +34,7 @@
     " set the runtime path to include vundle and initialize
     set nocompatible              " be iMproved, required
     filetype off                  " required
-    set rtp+=~/.vim/bundle/vundle.vim
+    set rtp+=$HOME/.vim/bundle/Vundle.vim
     call vundle#begin()
     " alternatively, pass a path where vundle should install plugins
     "call vundle#begin('~/some/path/here')
@@ -122,7 +122,7 @@
 
     " intellisense for vim using coc
     " https://www.youtube.com/watch?v=OXEVhnY621M&t=3s&ab_channel=ChrisAtMachine
-    " https://github.com/neoclide/coc.nvim/issues/3258. Go to the coc.nvim/ folder and run:
+    " https://github.com/neoclide/coc.nvim/issues/3258. Go to the ~/.vim/bundle/coc.nvim/ folder and run:
     " `yarn install` and `yarn build`
     " https://github.com/neoclide/coc.nvim/wiki/Language-servers
     " Plugin 'neoclide/coc.nvim'
@@ -346,14 +346,14 @@
     "     autocmd BufEnter * lua require("scrollbar").setup()
     " augroup END
 
-    " a bit more extensive file name at the top status line
-    Plugin 'nvim-treesitter/nvim-treesitter' 
+    " a bit more extensive file name at the top status line" use nvim packer instead
+    " Plugin 'nvim-treesitter/nvim-treesitter' " use nvim packer instead
     " the following plugin adds more stuff to status line to display function's context
     " but too much work to get working
     " Plugin 'SmiteshP/nvim-gps'
 
     
-    " vim ranger (note that nvim cannot display preview image)
+    " vim ranger (note that nvim cannot display preview image)" use nvim packer instead
     " Plugin 'rbgrouleff/bclose.vim'
     " Plugin 'francoiscabrol/ranger.vim'
     " nnoremap <silent> <leader>rr :Ranger<CR>
