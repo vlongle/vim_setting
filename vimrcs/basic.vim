@@ -283,7 +283,8 @@
     " then <leader>q to close the diagnostic window!
     nmap <leader>d :CocDiagnostics<CR>
 
-
+    " automatically organize imports on save in python files (see https://github.com/neoclide/coc.nvim/issues/888)
+    autocmd BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
     " https://github.com/lilydjwg/colorizer
     " to color #rgb, #rgba, #rrggbb, #rrgbbaa, rgb(...), rgba(...)
@@ -396,6 +397,10 @@
     nmap [m :BookmarkPrev<cr>
 
     Plugin 'tpope/vim-commentary'
+
+
+    " highlight trailing whitespaces
+    Plugin 'ntpeters/vim-better-whitespace'
     call vundle#end()            " required
 
 
@@ -865,6 +870,10 @@ set termguicolors
 
 " enable mouse to select panes, scrolling down ect... in Vim
 set mouse=a
+
+" set vertical line at column 100 to help us avoid writing
+" super long lines
+set colorcolumn=100
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
