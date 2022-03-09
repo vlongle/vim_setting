@@ -133,7 +133,7 @@
     " Do :checlhealth to see if everything is installed for the current file
     "
     " Install extensions
-    let g:coc_global_extensions = ['coc-pyright', 'coc-tsserver', 'coc-clangd', 'coc-css', 'coc-html', 'coc-vimlsp', 'coc-snippets', 'coc-explorer', 'coc-json']
+    let g:coc_global_extensions = ['coc-pyright', 'coc-tsserver', 'coc-clangd', 'coc-css', 'coc-html', 'coc-vimlsp', 'coc-snippets', 'coc-explorer', 'coc-json', 'coc-diagnostic', 'coc-actions', 'coc-lua']
 
     " https://www.youtube.com/watch?v=ebrEY-6EwXI&t=294s&ab_channel=chris%40machine
     " CocInstall coc-snippets
