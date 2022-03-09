@@ -43,7 +43,7 @@
     Plugin 'vundlevim/vundle.vim'
 
     "Plugin 'JamshedVesuna/vim-markdown-preview'
-    Plugin 'iamcco/markdown-preview.nvim'
+    Plugin 'iamcco/markdown-preview.nvim' 
     let g:mkdp_auto_start = 1
     let g:mkdp_refresh_slow = 1
 
@@ -84,13 +84,16 @@
     " " Might have to install this https://github.com/vim-airline/vim-airline-themes
     " let g:airline_theme='dracula'
     " let g:airline#extensions#tabline#formatter = 'default'
+    
     " even more icons for airline!!
     Plugin 'ryanoasis/vim-devicons'
 
 
+    
     " Cool way to show all the functions/class within a file
     Plugin 'preservim/tagbar'
     nmap <leader>tt :TagbarToggle<CR>
+    
     " https://www.redhat.com/sysadmin/five-vim-plugins
 
 
@@ -185,6 +188,7 @@
     " but too much work to get working
     " Plugin 'SmiteshP/nvim-gps'
 
+    
     " vim ranger (note that nvim cannot display preview image)" use nvim packer instead
     " Plugin 'rbgrouleff/bclose.vim'
     " Plugin 'francoiscabrol/ranger.vim'
@@ -500,13 +504,13 @@
     map <leader>tc :tabclose<cr>
     noremap<leader>td :tabclose<cr>
     map <leader>tm :tabmove
-    " should use gt
+    " should use gt 
     map <leader>t<leader> :tabnext<cr>
     " Opens a new tab with the current buffer's path
     " Super useful when editing files in the same directory
     map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>
     " to replace gt and gT
-    noremap ]t :tabnext<CR>
+    noremap ]t :tabnext<CR> 
     noremap [t :tabprevious<CR>
     " move between tabs, gt (next tab) gT (previous tab)
     " Let 'tl' toggle between this and the last accessed tab
@@ -680,7 +684,7 @@ command Sterm :belowright split | terminal
 nnoremap tv :Vterm<CR>
 nnoremap ts :Sterm<CR>
 " open terminal in new buffer
-nnoremap tt :term<CR>
+nnoremap tt :term<CR> 
 
 
 " Note: in vim, ctrl+[ functions as <ESC>
