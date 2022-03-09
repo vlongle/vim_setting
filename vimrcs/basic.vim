@@ -43,7 +43,7 @@
     Plugin 'vundlevim/vundle.vim'
 
     "Plugin 'JamshedVesuna/vim-markdown-preview'
-    Plugin 'iamcco/markdown-preview.nvim' 
+    Plugin 'iamcco/markdown-preview.nvim'
     let g:mkdp_auto_start = 1
     let g:mkdp_refresh_slow = 1
 
@@ -84,16 +84,13 @@
     " " Might have to install this https://github.com/vim-airline/vim-airline-themes
     " let g:airline_theme='dracula'
     " let g:airline#extensions#tabline#formatter = 'default'
-    
     " even more icons for airline!!
     Plugin 'ryanoasis/vim-devicons'
 
 
-    
     " Cool way to show all the functions/class within a file
     Plugin 'preservim/tagbar'
     nmap <leader>tt :TagbarToggle<CR>
-    
     " https://www.redhat.com/sysadmin/five-vim-plugins
 
 
@@ -134,6 +131,9 @@
     " Vim: :CocInstall coc-vimlsp
     " have github copilot.
     " Do :checlhealth to see if everything is installed for the current file
+    "
+    " Install extensions
+    let g:coc_global_extensions = ['coc-pyright', 'coc-tsserver', 'coc-clangd', 'coc-css', 'coc-html', 'coc-vimlsp', 'coc-snippets', 'coc-explorer', 'coc-json']
 
     " https://www.youtube.com/watch?v=ebrEY-6EwXI&t=294s&ab_channel=chris%40machine
     " CocInstall coc-snippets
@@ -256,7 +256,7 @@
     " Left side is staged and right side is unstaged in coc-explorer
 
     let g:coc_explorer_open_win = 'g:open_float_win_for_coc_explorer'
-    " quit 
+    " quit
 "" if only one buffer named 'coc-explorer' is shown, then exit
 
     function! SmartCloseFile()
@@ -353,7 +353,6 @@
     " but too much work to get working
     " Plugin 'SmiteshP/nvim-gps'
 
-    
     " vim ranger (note that nvim cannot display preview image)" use nvim packer instead
     " Plugin 'rbgrouleff/bclose.vim'
     " Plugin 'francoiscabrol/ranger.vim'
