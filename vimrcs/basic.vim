@@ -73,7 +73,7 @@
     " Allow fuzzy finder to search for files
     " in all of this current git repo not only
     " just the current directory
-    Plugin 'airblade/vim-rooter'
+    " Plugin 'airblade/vim-rooter'
 
 
 
@@ -296,8 +296,16 @@
     " in insert mode, use shift-tab to do ctrl+p
     " ctrl+p is to go backward in coc suggestion list
     " (i.e. inverse of tab)
-    inoremap <S-Tab> <C-P>
-
+    "inoremap <S-Tab> <C-P>
+    "
+    
+    " tab to go forward in suggestion list and shift+tab to go backward
+    inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+    inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     Plugin 'ThePrimeagen/vim-be-good'
 
@@ -553,15 +561,15 @@
     "
     " colorscheme srcery
 
-    set cursorline
     " https://stackoverflow.com/questions/33936915/how-to-underline-rather-than-highlight-the-current-line-in-vim
     " get underline instead of highlight the current line
+    set cursorline
     hi clear CursorLine
     hi CursorLine gui=underline cterm=underline
 
     " https://stackoverflow.com/questions/37712730/set-vim-background-transparent. Make
     " transparent background
-    " autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+    autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 
 
     " Set extra options when running in GUI mode
@@ -668,13 +676,13 @@
     map <leader>tc :tabclose<cr>
     noremap<leader>td :tabclose<cr>
     map <leader>tm :tabmove
-    " should use gt 
+    " should use gt
     map <leader>t<leader> :tabnext<cr>
     " Opens a new tab with the current buffer's path
     " Super useful when editing files in the same directory
     map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>
     " to replace gt and gT
-    noremap ]t :tabnext<CR> 
+    noremap ]t :tabnext<CR>
     noremap [t :tabprevious<CR>
     " move between tabs, gt (next tab) gT (previous tab)
     " Let 'tl' toggle between this and the last accessed tab
